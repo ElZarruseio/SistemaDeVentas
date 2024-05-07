@@ -8,7 +8,9 @@ package Vista;
 import Modelo.ClienteDAO;
 import Modelo.cliente;
 import java.math.BigInteger;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,10 +19,36 @@ import javax.swing.JOptionPane;
 public class Sistema extends javax.swing.JFrame {
 
     cliente cl = new cliente();
-    ClienteDAO clien = new ClienteDAO();
-
+    ClienteDAO client = new ClienteDAO();
+    DefaultTableModel modelo = new DefaultTableModel();
+    
     public Sistema() {
         initComponents();
+    }
+    
+    public void ListarCliente(){
+        List<cliente> ListarCl = client.ListarCliente();
+        
+        modelo = (DefaultTableModel) tableCliente.getModel();
+        Object [] ob = new Object[6];
+        for (int i = 0; i < ListarCl.size(); i++) {
+            ob[0] = ListarCl.get(i).getId();
+            ob[1] = ListarCl.get(i).getDni();
+            ob[2] = ListarCl.get(i).getNombre();
+            ob[3] = ListarCl.get(i).getTelefono();
+            ob[4] = ListarCl.get(i).getDireccion();
+            ob[5] = ListarCl.get(i).getRazon();
+            modelo.addRow(ob);
+        }
+        
+        tableCliente.setModel(modelo); // se agraga el modelo a la tabla de la vista de clientes
+    }
+    
+    public void limpiarTable(){
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            modelo.removeRow(i);
+            i = i-1;
+        }
     }
 
     /**
@@ -158,6 +186,11 @@ public class Sistema extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Clientes.png"))); // NOI18N
         jButton2.setText("Clientes");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Proveedor.png"))); // NOI18N
@@ -444,16 +477,17 @@ public class Sistema extends javax.swing.JFrame {
 
             },
             new String [] {
-                "DNI/RUC", "NOMBRE", "Telefono", "Direccion", "Razon Social"
+                "ID", "DNI/RUC", "NOMBRE", "TELEFONO", "DIRECCION", "R. SOCIAL"
             }
         ));
         jScrollPane2.setViewportView(tableCliente);
         if (tableCliente.getColumnModel().getColumnCount() > 0) {
             tableCliente.getColumnModel().getColumn(0).setPreferredWidth(50);
             tableCliente.getColumnModel().getColumn(1).setPreferredWidth(100);
-            tableCliente.getColumnModel().getColumn(2).setPreferredWidth(50);
+            tableCliente.getColumnModel().getColumn(2).setPreferredWidth(100);
             tableCliente.getColumnModel().getColumn(3).setPreferredWidth(80);
             tableCliente.getColumnModel().getColumn(4).setPreferredWidth(80);
+            tableCliente.getColumnModel().getColumn(5).setPreferredWidth(50);
         }
 
         btnGuardarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Guardar todo.png"))); // NOI18N
@@ -1106,7 +1140,7 @@ public class Sistema extends javax.swing.JFrame {
             cl.setDireccion(txtDirecCliente.getText());
             cl.setRazon(txtRazonCliente.getText());
             
-            clien.RegistrarCliente(cl); //Metodo registrar cliente pasado al btnguardar con el parametro cl
+            boolean RegistrarCliente = client.RegistrarCliente(cl); //Metodo registrar cliente pasado al btnguardar con el parametro cl
             JOptionPane.showMessageDialog(null,"Cliente Registrado");
         }else {
             JOptionPane.showMessageDialog(null,"Los campos estan vacios");
@@ -1114,6 +1148,12 @@ public class Sistema extends javax.swing.JFrame {
         
 
     }//GEN-LAST:event_btnGuardarClienteActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        limpiarTable();
+        ListarCliente();
+        jTabbedPane1.setSelectedIndex(1);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
