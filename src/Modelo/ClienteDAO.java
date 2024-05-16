@@ -52,7 +52,7 @@ public class ClienteDAO {
 
         List<cliente> ListaCl = new ArrayList();
 
-        String sql = "SELECT * FROM clientes";
+        String sql = "SELECT * FROM clientes ";
 
         try {
             con = cn.getConnection();
@@ -64,7 +64,7 @@ public class ClienteDAO {
                 cl.setId((int) rs.getLong("id"));
                 cl.setDni(rs.getInt("dni"));
                 cl.setNombre(rs.getString("nombre"));
-                cl.setTelefono(rs.getInt("telefono"));
+                cl.setTelefono((int) rs.getLong("telefono"));
                 cl.setDireccion(rs.getString("direccion"));
                 cl.setRazon(rs.getString("razon"));
 
@@ -76,18 +76,29 @@ public class ClienteDAO {
         }
         return ListaCl;
     }
-    
-        public boolean EliminarCliente(int id){
-        
-            String sql ="DELETE * FROM clientes WHERE id = ?";
+
+    public boolean EliminarCliente(int id) {
+        //con esta clase eliminamos el cliente
+
+        String sql = "DELETE FROM clientes WHERE id = ?";
+        try {
+            ps = con.prepareStatement(sql); //conectatos con el metodo conectar (con) a la consulta sql
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
+
+        } finally {
+            //cerramos la conexion con el try-catch
             try {
-                ps = con.prepareStatement(sql);
-                ps.setInt(1, id);
-                ps.execute();
-                return true;
-                
-            } catch (SQLException e) {
-                System.out.println(e.toString());
+                con.close();
+            } catch (SQLException ex) {
+
+                System.out.println(ex.toString());
             }
         }
+    }
 }
