@@ -21,16 +21,16 @@ public class Sistema extends javax.swing.JFrame {
     cliente cl = new cliente();
     ClienteDAO client = new ClienteDAO();
     DefaultTableModel modelo = new DefaultTableModel();
-    
+
     public Sistema() {
         initComponents();
     }
-    
-    public void ListarCliente(){
+
+    public void ListarCliente() {
         List<cliente> ListarCl = client.ListarCliente();
-        
+
         modelo = (DefaultTableModel) tableCliente.getModel();
-        Object [] ob = new Object[6];
+        Object[] ob = new Object[6];
         for (int i = 0; i < ListarCl.size(); i++) {
             ob[0] = ListarCl.get(i).getId();
             ob[1] = ListarCl.get(i).getDni();
@@ -40,15 +40,15 @@ public class Sistema extends javax.swing.JFrame {
             ob[5] = ListarCl.get(i).getRazon();
             modelo.addRow(ob);
         }
-        
+
         tableCliente.setModel(modelo); // se agraga el modelo a la tabla de la vista de clientes
     }
-    
-    public void limpiarTable(){
+
+    public void limpiarTable() {
         for (int i = 0; i < modelo.getRowCount(); i++) {
             modelo.removeRow(i);
-            i = i-1;
-        }
+            i = i - 1;
+        } // se usa este for dentro de la clase limpiarTable para que cada que demos click en clientes no se repitan los clientes guardados en la base de datos
     }
 
     /**
@@ -480,6 +480,11 @@ public class Sistema extends javax.swing.JFrame {
                 "ID", "DNI/RUC", "NOMBRE", "TELEFONO", "DIRECCION", "R. SOCIAL"
             }
         ));
+        tableCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableClienteMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tableCliente);
         if (tableCliente.getColumnModel().getColumnCount() > 0) {
             tableCliente.getColumnModel().getColumn(0).setPreferredWidth(50);
@@ -1077,7 +1082,21 @@ public class Sistema extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevoClienteActionPerformed
 
     private void btnBorrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarClienteActionPerformed
-        // TODO add your handling code here:
+        //asignamos la funcionalidad al btnBorrarCliente con condiconales y la clase EliminarCliente ya creada
+        //primero verifiacmos que el id sea distinto de vacio y asi sabremos si hay algun cliente seleccionado para poder eliminar
+        if (!"".equals(txtIdCliente.getText())) {
+            // con esto lanzamos un mensaje por venta emergente al usuario
+            //confirmando que eliminara al cliente seleccionado
+            int pregunta = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar?");
+            if (pregunta == 0) {
+                int id = Integer.parseInt(txtIdCliente.getText());
+                client.EliminarCliente(id);
+                limpiarTable();
+                LimpiarCliente();
+                ListarCliente();
+            }
+        }
+
     }//GEN-LAST:event_btnBorrarClienteActionPerformed
 
     private void txtDirecProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDirecProveedorActionPerformed
@@ -1136,16 +1155,18 @@ public class Sistema extends javax.swing.JFrame {
         if (!"".equals(txtDNICliente.getText()) || !"".equals(txtNomCliente.getText()) || !"".equals(txtTelCliente.getText()) || !"".equals(txtDirecCliente.getText()) || !"".equals(txtRazonCliente.getText())) {
             cl.setDni(Integer.parseInt(txtDNICliente.getText()));
             cl.setNombre(txtNomCliente.getText());
-            cl.setTelefono((int) Long.parseLong(txtTelCliente.getText()));
+            cl.setTelefono(txtTelCliente.getText());
             cl.setDireccion(txtDirecCliente.getText());
             cl.setRazon(txtRazonCliente.getText());
-            
-            boolean RegistrarCliente = client.RegistrarCliente(cl); //Metodo registrar cliente pasado al btnguardar con el parametro cl
-            JOptionPane.showMessageDialog(null,"Cliente Registrado");
-        }else {
-            JOptionPane.showMessageDialog(null,"Los campos estan vacios");
+            client.RegistrarCliente(cl); //Metodo registrar cliente pasado al btnguardar con el parametro cl 
+            limpiarTable();
+            LimpiarCliente();
+            ListarCliente();
+            JOptionPane.showMessageDialog(null, "Cliente Registrado");
+        } else {
+            JOptionPane.showMessageDialog(null, "Los campos estan vacios");
         }
-        
+
 
     }//GEN-LAST:event_btnGuardarClienteActionPerformed
 
@@ -1154,6 +1175,19 @@ public class Sistema extends javax.swing.JFrame {
         ListarCliente();
         jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tableClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableClienteMouseClicked
+        //Mostramos los usuarios en la tabla y la informacion en los txt correspondientes con estos metodos
+
+        int fila = tableCliente.rowAtPoint(evt.getPoint());
+
+        txtIdCliente.setText(tableCliente.getValueAt(fila, 0).toString());
+        txtDNICliente.setText(tableCliente.getValueAt(fila, 1).toString());
+        txtNomCliente.setText(tableCliente.getValueAt(fila, 2).toString());
+        txtTelCliente.setText(tableCliente.getValueAt(fila, 3).toString());
+        txtDirecCliente.setText(tableCliente.getValueAt(fila, 4).toString());
+        txtRazonCliente.setText(tableCliente.getValueAt(fila, 5).toString());
+    }//GEN-LAST:event_tableClienteMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1300,4 +1334,12 @@ public class Sistema extends javax.swing.JFrame {
     private javax.swing.JTextField txtTelCliente;
     private javax.swing.JTextField txtTelProveedor;
     // End of variables declaration//GEN-END:variables
+    private void LimpiarCliente(){
+        txtIdCliente.setText("");
+        txtDNICliente.setText("");
+        txtNomCliente.setText("");
+        txtTelCliente.setText("");
+        txtDirecCliente.setText("");
+        txtRazonCliente.setText("");
+    }
 }
