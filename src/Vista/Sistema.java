@@ -25,6 +25,7 @@ public class Sistema extends javax.swing.JFrame {
     public Sistema() {
         initComponents();
         this.setLocationRelativeTo(null);
+        txtIdCliente.setVisible(false);
     }
 
     public void ListarCliente() {
@@ -473,6 +474,12 @@ public class Sistema extends javax.swing.JFrame {
             }
         });
 
+        txtTelCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTelClienteActionPerformed(evt);
+            }
+        });
+
         tableCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -542,22 +549,26 @@ public class Sistema extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel16))
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNomCliente)
-                            .addComponent(txtTelCliente)
-                            .addComponent(txtDirecCliente)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(txtDNICliente, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtRazonCliente)))
+                                .addComponent(txtRazonCliente))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel15))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtDirecCliente, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtTelCliente, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNomCliente, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtDNICliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 7, Short.MAX_VALUE)
+                        .addGap(18, 18, 18))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(49, 49, 49)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -566,9 +577,9 @@ public class Sistema extends javax.swing.JFrame {
                         .addGap(75, 75, 75)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnBorrarCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(btnActuaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
+                            .addComponent(btnActuaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -576,9 +587,7 @@ public class Sistema extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
@@ -593,22 +602,22 @@ public class Sistema extends javax.swing.JFrame {
                             .addComponent(jLabel14)
                             .addComponent(txtTelCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15)
                             .addComponent(txtDirecCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(27, 27, 27)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel16)
                             .addComponent(txtRazonCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(31, 31, 31)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnActuaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnGuardarCliente))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnNuevoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnBorrarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(62, 62, 62))))
+                            .addComponent(btnBorrarCliente))))
+                .addGap(45, 45, 45))
         );
 
         jTabbedPane1.addTab("tab2", jPanel3);
@@ -1084,7 +1093,7 @@ public class Sistema extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDNIClienteActionPerformed
 
     private void btnNuevoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoClienteActionPerformed
-        // TODO add your handling code here:
+        LimpiarCliente();
     }//GEN-LAST:event_btnNuevoClienteActionPerformed
 
     private void btnBorrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarClienteActionPerformed
@@ -1159,7 +1168,7 @@ public class Sistema extends javax.swing.JFrame {
 
     private void btnGuardarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarClienteActionPerformed
         if (!"".equals(txtDNICliente.getText()) || !"".equals(txtNomCliente.getText()) || !"".equals(txtTelCliente.getText()) || !"".equals(txtDirecCliente.getText()) || !"".equals(txtRazonCliente.getText())) {
-            cl.setDni(Integer.parseInt(txtDNICliente.getText()));
+            cl.setDni(txtDNICliente.getText());
             cl.setNombre(txtNomCliente.getText());
             cl.setTelefono(txtTelCliente.getText());
             cl.setDireccion(txtDirecCliente.getText());
@@ -1197,13 +1206,13 @@ public class Sistema extends javax.swing.JFrame {
 
     private void btnActuaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActuaClienteActionPerformed
 
-        if ("".equals(txtIdCliente.getText())) {
+        /*if ("".equals(txtIdCliente.getText())) {
             JOptionPane.showMessageDialog(null, "Seleccione una fila");
         } else {
             //Con este condicional verifico si los campos de txt tiene un caracter por lo menos, y asi se ejecuta el codigo dentro del if, si no se ejecuta el else
             if (!txtNomCliente.getText().isEmpty() && !txtTelCliente.getText().isEmpty() && !txtDirecCliente.getText().isEmpty() && !txtRazonCliente.getText().isEmpty() && !txtIdCliente.getText().isEmpty()) {
-                
-                cl.setDni(Integer.parseInt(txtDNICliente.getText()));
+
+                cl.setDni(txtDNICliente.getText());
                 cl.setNombre(txtNomCliente.getText());
                 cl.setTelefono(txtTelCliente.getText());
                 cl.setDireccion(txtDirecCliente.getText());
@@ -1215,9 +1224,42 @@ public class Sistema extends javax.swing.JFrame {
                 ListarCliente();
             } else {
                 JOptionPane.showMessageDialog(null, "Ninguno de los campos pueden estar vacios");
-            }
+            }*/
+        if ("".equals(txtIdCliente.getText())) {
+            JOptionPane.showMessageDialog(null, "Seleccione una fila");
+        }else if(txtNomCliente.getText().isEmpty() || txtTelCliente.getText().isEmpty() || txtDirecCliente.getText().isEmpty() || txtRazonCliente.getText().isEmpty() || txtIdCliente.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"La mayoria de Campos estan vacios");
+        } else if (txtDNICliente.getText().isEmpty()) {
+            // Verificar si el campo DNI está vacío
+            JOptionPane.showMessageDialog(null, "El campo DNI esta vacío");
+        } else if (txtNomCliente.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo Nombre esta vacio");
+        } else if (txtTelCliente.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo Telefono esta vacio");
+        } else if (txtDirecCliente.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo Direccion esta vacio");
+        } else if (txtRazonCliente.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo Razon Social esta vacio");
+        } else {
+            cl.setDni(txtDNICliente.getText());
+            cl.setNombre(txtNomCliente.getText());
+            cl.setTelefono(txtTelCliente.getText());
+            cl.setDireccion(txtDirecCliente.getText());
+            cl.setRazon(txtRazonCliente.getText());
+            cl.setId(Integer.parseInt(txtIdCliente.getText()));
+            client.ModificarCliente(cl);
+            limpiarTable();
+            LimpiarCliente();
+            ListarCliente();
+
         }
+
+
     }//GEN-LAST:event_btnActuaClienteActionPerformed
+
+    private void txtTelClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTelClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1233,16 +1275,24 @@ public class Sistema extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Sistema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Sistema.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Sistema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Sistema.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Sistema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Sistema.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Sistema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Sistema.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
