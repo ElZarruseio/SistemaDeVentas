@@ -24,6 +24,7 @@ public class Sistema extends javax.swing.JFrame {
 
     public Sistema() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     public void ListarCliente() {
@@ -439,13 +440,13 @@ public class Sistema extends javax.swing.JFrame {
                             .addComponent(txtDireCliVen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtRazonCliVen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(btnGeneVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(labelTotalVenta))))
+                            .addComponent(labelTotalVenta)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(btnGeneVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(41, 41, 41))
         );
 
@@ -505,6 +506,11 @@ public class Sistema extends javax.swing.JFrame {
 
         btnActuaCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Actualizar.png"))); // NOI18N
         btnActuaCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnActuaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActuaClienteActionPerformed(evt);
+            }
+        });
 
         btnNuevoCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Nuevo .png"))); // NOI18N
         btnNuevoCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -596,12 +602,12 @@ public class Sistema extends javax.swing.JFrame {
                             .addComponent(txtRazonCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnActuaCliente)
+                            .addComponent(btnActuaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnGuardarCliente))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnNuevoCliente)
-                            .addComponent(btnBorrarCliente))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnNuevoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBorrarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(62, 62, 62))))
         );
 
@@ -1189,6 +1195,30 @@ public class Sistema extends javax.swing.JFrame {
         txtRazonCliente.setText(tableCliente.getValueAt(fila, 5).toString());
     }//GEN-LAST:event_tableClienteMouseClicked
 
+    private void btnActuaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActuaClienteActionPerformed
+
+        if ("".equals(txtIdCliente.getText())) {
+            JOptionPane.showMessageDialog(null, "Seleccione una fila");
+        } else {
+            //Con este condicional verifico si los campos de txt tiene un caracter por lo menos, y asi se ejecuta el codigo dentro del if, si no se ejecuta el else
+            if (!txtNomCliente.getText().isEmpty() && !txtTelCliente.getText().isEmpty() && !txtDirecCliente.getText().isEmpty() && !txtRazonCliente.getText().isEmpty() && !txtIdCliente.getText().isEmpty()) {
+                
+                cl.setDni(Integer.parseInt(txtDNICliente.getText()));
+                cl.setNombre(txtNomCliente.getText());
+                cl.setTelefono(txtTelCliente.getText());
+                cl.setDireccion(txtDirecCliente.getText());
+                cl.setRazon(txtRazonCliente.getText());
+                cl.setId(Integer.parseInt(txtIdCliente.getText()));
+                client.ModificarCliente(cl);
+                limpiarTable();
+                LimpiarCliente();
+                ListarCliente();
+            } else {
+                JOptionPane.showMessageDialog(null, "Ninguno de los campos pueden estar vacios");
+            }
+        }
+    }//GEN-LAST:event_btnActuaClienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1334,7 +1364,7 @@ public class Sistema extends javax.swing.JFrame {
     private javax.swing.JTextField txtTelCliente;
     private javax.swing.JTextField txtTelProveedor;
     // End of variables declaration//GEN-END:variables
-    private void LimpiarCliente(){
+    private void LimpiarCliente() {
         txtIdCliente.setText("");
         txtDNICliente.setText("");
         txtNomCliente.setText("");
