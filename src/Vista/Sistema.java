@@ -6,6 +6,8 @@
 package Vista;
 
 import Modelo.ClienteDAO;
+import Modelo.Proveedor;
+import Modelo.ProveedorDAO;
 import Modelo.cliente;
 import java.math.BigInteger;
 import java.util.List;
@@ -20,6 +22,8 @@ public class Sistema extends javax.swing.JFrame {
 
     cliente cl = new cliente();
     ClienteDAO client = new ClienteDAO();
+    Proveedor pr = new Proveedor();
+    ProveedorDAO prDao = new ProveedorDAO();
     DefaultTableModel modelo = new DefaultTableModel();
 
     public Sistema() {
@@ -546,39 +550,36 @@ public class Sistema extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtRazonCliente))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel13)
+                                .addComponent(jLabel12)
+                                .addComponent(jLabel14)
+                                .addComponent(jLabel15))
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtDirecCliente, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtTelCliente, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtNomCliente, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtDNICliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtRazonCliente))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel14)
-                                    .addComponent(jLabel15))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtDirecCliente, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTelCliente, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNomCliente, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtDNICliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 7, Short.MAX_VALUE)
-                        .addGap(18, 18, 18))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnGuardarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnNuevoCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(75, 75, 75)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnBorrarCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(btnActuaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnActuaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 7, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -609,14 +610,15 @@ public class Sistema extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel16)
                             .addComponent(txtRazonCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnActuaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnGuardarCliente))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnNuevoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnBorrarCliente))))
+                            .addComponent(btnBorrarCliente))
+                        .addGap(13, 13, 13)))
                 .addGap(45, 45, 45))
         );
 
@@ -654,19 +656,25 @@ public class Sistema extends javax.swing.JFrame {
 
             },
             new String [] {
-                "RUC", "NOMBRE", "TELEFONO", "DIRECCION", "RAZON SOCIAL"
+                "ID", "RUC", "NOMBRE", "TELEFONO", "DIRECCION", "R. SOCIAL"
             }
         ));
         jScrollPane3.setViewportView(TableProveedor);
         if (TableProveedor.getColumnModel().getColumnCount() > 0) {
-            TableProveedor.getColumnModel().getColumn(0).setPreferredWidth(40);
-            TableProveedor.getColumnModel().getColumn(1).setPreferredWidth(100);
-            TableProveedor.getColumnModel().getColumn(2).setPreferredWidth(50);
-            TableProveedor.getColumnModel().getColumn(3).setPreferredWidth(80);
-            TableProveedor.getColumnModel().getColumn(4).setPreferredWidth(50);
+            TableProveedor.getColumnModel().getColumn(0).setPreferredWidth(20);
+            TableProveedor.getColumnModel().getColumn(1).setPreferredWidth(40);
+            TableProveedor.getColumnModel().getColumn(2).setPreferredWidth(100);
+            TableProveedor.getColumnModel().getColumn(3).setPreferredWidth(50);
+            TableProveedor.getColumnModel().getColumn(4).setPreferredWidth(80);
+            TableProveedor.getColumnModel().getColumn(5).setPreferredWidth(50);
         }
 
         btnGuarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Guardar todo.png"))); // NOI18N
+        btnGuarProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuarProveedorActionPerformed(evt);
+            }
+        });
 
         btnNuevoProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Nuevo .png"))); // NOI18N
 
@@ -1225,12 +1233,12 @@ public class Sistema extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Ninguno de los campos pueden estar vacios");
             }*/
+        
         if ("".equals(txtIdCliente.getText())) {
             JOptionPane.showMessageDialog(null, "Seleccione una fila");
-        }else if(txtNomCliente.getText().isEmpty() || txtTelCliente.getText().isEmpty() || txtDirecCliente.getText().isEmpty() || txtRazonCliente.getText().isEmpty() || txtIdCliente.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null,"La mayoria de Campos estan vacios");
-        } else if (txtDNICliente.getText().isEmpty()) {
-            // Verificar si el campo DNI está vacío
+        }else if(txtDNICliente.getText().isEmpty()||txtNomCliente.getText().isEmpty() || txtTelCliente.getText().isEmpty() || txtDirecCliente.getText().isEmpty() || txtRazonCliente.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Campos vacios");
+        } /*else if (txtDNICliente.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo DNI esta vacío");
         } else if (txtNomCliente.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo Nombre esta vacio");
@@ -1240,7 +1248,7 @@ public class Sistema extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "El campo Direccion esta vacio");
         } else if (txtRazonCliente.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo Razon Social esta vacio");
-        } else {
+        } */else {
             cl.setDni(txtDNICliente.getText());
             cl.setNombre(txtNomCliente.getText());
             cl.setTelefono(txtTelCliente.getText());
@@ -1260,6 +1268,21 @@ public class Sistema extends javax.swing.JFrame {
     private void txtTelClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelClienteActionPerformed
+
+    private void btnGuarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuarProveedorActionPerformed
+        // Con la condicional se verifica que ningun campo de datos este vacio
+        if (!"".equals(txtRucProveedor.getText()) || !"".equals(txtNomProveedor.getText()) || !"".equals(txtTelProveedor.getText()) || !"".equals(txtDirecProveedor.getText()) || !"".equals(txtRazonProveedor.getText())) {
+            pr.setRuc(Integer.parseInt(txtRucProveedor.getText()));
+            pr.setNombre(txtNomProveedor.getText());
+            pr.setTelefono(txtTelProveedor.getText());
+            pr.setDireccion(txtDirecProveedor.getText());
+            pr.setRazon(txtRazonProveedor.getText());
+            prDao.RegistrarProveedor(pr);
+        }else {
+            // si esta uno de los campos vacios se muestra un mensaje por venta emergente.
+        JOptionPane.showMessageDialog(null, "Campos vacios");
+        }
+    }//GEN-LAST:event_btnGuarProveedorActionPerformed
 
     /**
      * @param args the command line arguments
