@@ -1301,6 +1301,7 @@ public class Sistema extends javax.swing.JFrame {
             pr.setDireccion(txtDirecProveedor.getText());
             pr.setRazon(txtRazonProveedor.getText());
             prDao.RegistrarProveedor(pr);
+            
         }else {
             // si esta uno de los campos vacios se muestra un mensaje por venta emergente
         JOptionPane.showMessageDialog(null, "Campos vacios");
