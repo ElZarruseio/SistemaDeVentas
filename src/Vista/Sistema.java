@@ -1328,6 +1328,7 @@ public class Sistema extends javax.swing.JFrame {
         txtTelProveedor.setText(TableProveedor.getValueAt(fila, 3).toString());
         txtDirecProveedor.setText(TableProveedor.getValueAt(fila, 4).toString());
         txtRazonProveedor.setText(TableProveedor.getValueAt(fila, 5).toString());
+        
     }//GEN-LAST:event_TableProveedorMouseClicked
 
     /**
