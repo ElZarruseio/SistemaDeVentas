@@ -49,8 +49,8 @@ public class Sistema extends javax.swing.JFrame {
 
         tableCliente.setModel(modelo); // se agraga el modelo a la tabla de la vista de clientes
     }
-    
-     public void ListarProveedor() {
+
+    public void ListarProveedor() {
         List<Proveedor> ListarPr = prDao.ListarProveedor();
 
         modelo = (DefaultTableModel) TableProveedor.getModel();
@@ -1146,6 +1146,8 @@ public class Sistema extends javax.swing.JFrame {
                 LimpiarCliente();
                 ListarCliente();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione un Cliente para eliminar");
         }
 
     }//GEN-LAST:event_btnBorrarClienteActionPerformed
@@ -1175,7 +1177,19 @@ public class Sistema extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActuProActionPerformed
 
     private void btnBorrarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarProveedorActionPerformed
-        // TODO add your handling code here:
+        if (!"".equals(txtIdProveedor.getText())) {
+            int pregunta = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar?");
+            if (pregunta == 0) {
+                int id = Integer.parseInt(txtIdProveedor.getText());
+                prDao.EliminarProveedor(id);
+                limpiarTable();
+                LimpiarProveedor();
+                ListarProveedor();
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione un Proveedor para Eliminar");
+        }
     }//GEN-LAST:event_btnBorrarProveedorActionPerformed
 
     private void txtRucProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRucProveedorActionPerformed
@@ -1261,11 +1275,10 @@ public class Sistema extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Ninguno de los campos pueden estar vacios");
             }*/
-        
         if ("".equals(txtIdCliente.getText())) {
-            JOptionPane.showMessageDialog(null, "Seleccione una fila");
-        }else if(txtDNICliente.getText().isEmpty()||txtNomCliente.getText().isEmpty() || txtTelCliente.getText().isEmpty() || txtDirecCliente.getText().isEmpty() || txtRazonCliente.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null,"Campos vacios");
+            JOptionPane.showMessageDialog(null, "Seleccione un Cliente");
+        } else if (txtDNICliente.getText().isEmpty() || txtNomCliente.getText().isEmpty() || txtTelCliente.getText().isEmpty() || txtDirecCliente.getText().isEmpty() || txtRazonCliente.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campos vacios");
         } /*else if (txtDNICliente.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo DNI esta vacío");
         } else if (txtNomCliente.getText().isEmpty()) {
@@ -1276,7 +1289,7 @@ public class Sistema extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "El campo Direccion esta vacio");
         } else if (txtRazonCliente.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo Razon Social esta vacio");
-        } */else {
+        } */ else {
             cl.setDni(txtDNICliente.getText());
             cl.setNombre(txtNomCliente.getText());
             cl.setTelefono(txtTelCliente.getText());
@@ -1306,10 +1319,13 @@ public class Sistema extends javax.swing.JFrame {
             pr.setDireccion(txtDirecProveedor.getText());
             pr.setRazon(txtRazonProveedor.getText());
             prDao.RegistrarProveedor(pr);
-            
-        }else {
+            limpiarTable();
+            LimpiarProveedor();
+            ListarProveedor();
+            JOptionPane.showMessageDialog(null, "Proveedor registrado");
+        } else {
             // si esta uno de los campos vacios se muestra un mensaje por venta emergente
-        JOptionPane.showMessageDialog(null, "Campos vacios");
+            JOptionPane.showMessageDialog(null, "Campos vacios");
         }
     }//GEN-LAST:event_btnGuarProveedorActionPerformed
 
@@ -1321,14 +1337,14 @@ public class Sistema extends javax.swing.JFrame {
 
     private void TableProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableProveedorMouseClicked
         int fila = TableProveedor.rowAtPoint(evt.getPoint());
-        
+
         txtIdProveedor.setText(TableProveedor.getValueAt(fila, 0).toString());
         txtRucProveedor.setText(TableProveedor.getValueAt(fila, 1).toString());
         txtNomProveedor.setText(TableProveedor.getValueAt(fila, 2).toString());
         txtTelProveedor.setText(TableProveedor.getValueAt(fila, 3).toString());
         txtDirecProveedor.setText(TableProveedor.getValueAt(fila, 4).toString());
         txtRazonProveedor.setText(TableProveedor.getValueAt(fila, 5).toString());
-        
+
     }//GEN-LAST:event_TableProveedorMouseClicked
 
     /**
@@ -1491,5 +1507,14 @@ public class Sistema extends javax.swing.JFrame {
         txtTelCliente.setText("");
         txtDirecCliente.setText("");
         txtRazonCliente.setText("");
+    }
+
+    private void LimpiarProveedor() {
+        txtIdProveedor.setText("");
+        txtRucProveedor.setText("");
+        txtNomProveedor.setText("");
+        txtTelProveedor.setText("");
+        txtDirecProveedor.setText("");
+        txtRazonProveedor.setText("");
     }
 }
