@@ -682,6 +682,11 @@ public class Sistema extends javax.swing.JFrame {
                 "ID", "RUC", "NOMBRE", "TELEFONO", "DIRECCION", "R. SOCIAL"
             }
         ));
+        TableProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableProveedorMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(TableProveedor);
         if (TableProveedor.getColumnModel().getColumnCount() > 0) {
             TableProveedor.getColumnModel().getColumn(0).setPreferredWidth(20);
@@ -1313,6 +1318,17 @@ public class Sistema extends javax.swing.JFrame {
         ListarProveedor();
         jTabbedPane1.setSelectedIndex(2);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void TableProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableProveedorMouseClicked
+        int fila = TableProveedor.rowAtPoint(evt.getPoint());
+        
+        txtIdProveedor.setText(TableProveedor.getValueAt(fila, 0).toString());
+        txtRucProveedor.setText(TableProveedor.getValueAt(fila, 1).toString());
+        txtNomProveedor.setText(TableProveedor.getValueAt(fila, 2).toString());
+        txtTelProveedor.setText(TableProveedor.getValueAt(fila, 3).toString());
+        txtDirecProveedor.setText(TableProveedor.getValueAt(fila, 4).toString());
+        txtRazonProveedor.setText(TableProveedor.getValueAt(fila, 5).toString());
+    }//GEN-LAST:event_TableProveedorMouseClicked
 
     /**
      * @param args the command line arguments
