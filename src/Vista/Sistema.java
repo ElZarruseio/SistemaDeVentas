@@ -705,8 +705,18 @@ public class Sistema extends javax.swing.JFrame {
         });
 
         btnNuevoProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Nuevo .png"))); // NOI18N
+        btnNuevoProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoProveedorActionPerformed(evt);
+            }
+        });
 
         btnActuProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Actualizar.png"))); // NOI18N
+        btnActuProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActuProveedorActionPerformed(evt);
+            }
+        });
 
         btnBorrarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/borrar.png"))); // NOI18N
         btnBorrarProveedor.addActionListener(new java.awt.event.ActionListener() {
@@ -1346,6 +1356,30 @@ public class Sistema extends javax.swing.JFrame {
         txtRazonProveedor.setText(TableProveedor.getValueAt(fila, 5).toString());
 
     }//GEN-LAST:event_TableProveedorMouseClicked
+
+    private void btnActuProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActuProveedorActionPerformed
+        if ("".equals(txtIdProveedor.getText())) {
+            JOptionPane.showMessageDialog(null, "Seleccione un Proveedor");
+        } else {
+            if (!"".equals(txtRucProveedor.getText()) || !"".equals(txtNomProveedor.getText()) || !"".equals(txtTelProveedor.getText()) || !"".equals(txtDirecProveedor.getText()) || !"".equals(txtRazonProveedor.getText())) {
+                pr.setRuc(Integer.parseInt(txtRucProveedor.getText()));
+                pr.setNombre(txtNomProveedor.getText());
+                pr.setTelefono(txtTelProveedor.getText());
+                pr.setDireccion(txtDirecProveedor.getText());
+                pr.setRazon(txtRazonProveedor.getText());
+                pr.setId(Integer.parseInt(txtIdProveedor.getText()));
+                prDao.ModificarProveedor(pr);
+                limpiarTable();
+                ListarProveedor();
+                LimpiarProveedor();
+            }
+        }
+
+    }//GEN-LAST:event_btnActuProveedorActionPerformed
+
+    private void btnNuevoProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoProveedorActionPerformed
+        LimpiarProveedor();
+    }//GEN-LAST:event_btnNuevoProveedorActionPerformed
 
     /**
      * @param args the command line arguments
