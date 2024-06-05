@@ -6,6 +6,8 @@
 package Vista;
 
 import Modelo.ClienteDAO;
+import Modelo.Productos;
+import Modelo.ProductosDAO;
 import Modelo.Proveedor;
 import Modelo.ProveedorDAO;
 import Modelo.cliente;
@@ -24,6 +26,8 @@ public class Sistema extends javax.swing.JFrame {
     ClienteDAO client = new ClienteDAO();
     Proveedor pr = new Proveedor();
     ProveedorDAO prDao = new ProveedorDAO();
+    Productos pro = new Productos();
+    ProductosDAO proDao = new ProductosDAO();
     DefaultTableModel modelo = new DefaultTableModel();
 
     public Sistema() {
@@ -826,6 +830,11 @@ public class Sistema extends javax.swing.JFrame {
         });
 
         cbxProveePro.setEditable(true);
+        cbxProveePro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxProveeProActionPerformed(evt);
+            }
+        });
 
         TableProducto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1167,7 +1176,17 @@ public class Sistema extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPreProActionPerformed
 
     private void btnGuarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuarProActionPerformed
-        // TODO add your handling code here:
+        if (!"".equals(txtCodPro.getText()) || !"".equals(txtDesPro.getText()) || !"".equals(cbxProveePro.getSelectedItem()) || !"".equals(txtCanPro.getText()) || !"".equals(txtPrePro.getText())) {
+            pro.setCodigo(txtCodPro.getText());
+            pro.setNombre(txtDesPro.getText());
+            pro.setProveedor(cbxProveePro.getSelectedItem().toString());
+            pro.setStock(Integer.parseInt(txtCanPro.getText()));
+            pro.setPrecio(Double.parseDouble(txtPrePro.getText()));
+            proDao.RegistrarProductos(pro);
+            JOptionPane.showMessageDialog(null, "Producto Registrado");
+        }else{
+            JOptionPane.showMessageDialog(null, "Los campos estan vacios");
+        }
     }//GEN-LAST:event_btnGuarProActionPerformed
 
     private void btnActuProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActuProActionPerformed
@@ -1357,6 +1376,7 @@ public class Sistema extends javax.swing.JFrame {
                 pr.setRazon(txtRazonProveedor.getText());
                 pr.setId(Integer.parseInt(txtIdProveedor.getText()));
                 prDao.ModificarProveedor(pr);
+                 JOptionPane.showMessageDialog(null, "Proveedor actualizado");
                 limpiarTable();
                 ListarProveedor();
                 LimpiarProveedor();
@@ -1368,6 +1388,10 @@ public class Sistema extends javax.swing.JFrame {
     private void btnNuevoProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoProveedorActionPerformed
         LimpiarProveedor();
     }//GEN-LAST:event_btnNuevoProveedorActionPerformed
+
+    private void cbxProveeProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProveeProActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxProveeProActionPerformed
 
     /**
      * @param args the command line arguments
